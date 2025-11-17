@@ -76,6 +76,8 @@ class LinkedList2:
                 node.next = newNode
                 if self.tail == node:
                     self.tail = newNode
+                else:
+                    newNode.next.prev = newNode
             node = node.next
 
     def add_in_head(self, newNode):
@@ -83,6 +85,9 @@ class LinkedList2:
         newNode.prev = None
         if self.head == None:
             self.tail = newNode
+        else:
+            self.head.prev = newNode
         self.head = newNode
+
 
 
