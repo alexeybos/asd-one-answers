@@ -1,0 +1,88 @@
+from unittest import TestCase
+
+from ASD1.lesson06.task06 import Deque
+
+class TestDeque(TestCase):
+    def test_size(self):
+        deque = Deque()
+        deque.addFront(1)
+        self.assertEqual(1, deque.size())
+        deque.addFront(2)
+        self.assertEqual(2, deque.size())
+        deque.addTail(4)
+        self.assertEqual(3, deque.size())
+        deque.addTail(5)
+        self.assertEqual(4, deque.size())
+        self.assertEqual(5, deque.removeTail())
+        self.assertEqual(3, deque.size())
+        self.assertEqual(4, deque.removeTail())
+        self.assertEqual(2, deque.size())
+        self.assertEqual(2, deque.removeFront())
+        self.assertEqual(1, deque.size())
+        self.assertEqual(1, deque.removeFront())
+        self.assertEqual(0, deque.size())
+
+    def test_add_front(self):
+        deque = Deque()
+        self.assertEqual(0, deque.size())
+        deque.addFront(11)
+        self.assertEqual(1, deque.size())
+        self.assertEqual(11, deque.deque[0])
+        deque.addFront(22)
+        self.assertEqual(2, deque.size())
+        self.assertEqual(11, deque.deque[0])
+        self.assertEqual(22, deque.deque[1])
+
+    def test_add_tail(self):
+        deque = Deque()
+        self.assertEqual(0, deque.size())
+        deque.addTail(11)
+        self.assertEqual(11, deque.deque[0])
+        self.assertEqual(1, deque.size())
+        deque.addTail(12)
+        self.assertEqual(2, deque.size())
+        self.assertEqual(12, deque.deque[0])
+        self.assertEqual(11, deque.deque[1])
+
+    def test_remove_front(self):
+        deque = Deque()
+        self.assertEqual(0, deque.size())
+        deque.addFront(11)
+        self.assertEqual(1, deque.size())
+        deque.addFront(22)
+        deque.addTail(33)
+        deque.addTail(44)
+        self.assertEqual(4, deque.size())
+        self.assertEqual(22, deque.removeFront())
+        self.assertEqual(0, deque.deque.count(22))
+        self.assertEqual(11, deque.removeFront())
+        self.assertEqual(0, deque.deque.count(11))
+        self.assertEqual(33, deque.removeFront())
+        self.assertEqual(0, deque.deque.count(33))
+        self.assertEqual(1, deque.deque.count(44))
+        self.assertEqual(44, deque.removeFront())
+        self.assertEqual(0, deque.deque.count(44))
+        self.assertIsNone(deque.removeFront())
+        self.assertEqual(0, deque.size())
+
+    def test_remove_tail(self):
+        deque = Deque()
+        self.assertEqual(0, deque.size())
+        deque.addFront(11)
+        self.assertEqual(1, deque.size())
+        deque.addFront(22)
+        deque.addTail(33)
+        deque.addTail(44)
+        self.assertEqual(4, deque.size())
+        self.assertEqual(44, deque.removeTail())
+        self.assertEqual(0, deque.deque.count(44))
+        self.assertEqual(33, deque.removeTail())
+        self.assertEqual(0, deque.deque.count(33))
+        self.assertEqual(11, deque.removeTail())
+        self.assertEqual(0, deque.deque.count(11))
+        self.assertEqual(22, deque.removeTail())
+        self.assertEqual(0, deque.deque.count(22))
+        self.assertIsNone(deque.removeTail())
+        self.assertEqual(0, deque.size())
+
+
