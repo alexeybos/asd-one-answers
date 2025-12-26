@@ -50,3 +50,7 @@ class NativeCache:
             slot -= self.size
             i += 1
         return None
+
+
+
+
